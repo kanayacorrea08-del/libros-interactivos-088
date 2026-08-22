@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Libros interactivos · FDOC-088 · Universidad de Córdoba</title>
+<meta name="description" content="Cuatro libros interactivos del programa Técnico Profesional en Programación Web de la Universidad de Córdoba. Se leen en el navegador, sin instalar nada.">
+<style>
+:root{
+  --papel:#fbfaf7; --papel-2:#f2efe8; --linea:#ddd8cc;
+  --tinta:#1b2431; --tinta-2:#5a6577;
+  --noche:#14263f; --oro:#8b6b2e;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --serif:"Charter","Bitstream Charter","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --papel:#141821; --papel-2:#1c222e; --linea:#2c3442;
+         --tinta:#e6e9ef; --tinta-2:#9aa5b6; --noche:#cfe0f5; --oro:#d9b979; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--serif);
+  font-size:17.5px;line-height:1.64;-webkit-font-smoothing:antialiased}
+.envoltura{max-width:820px;margin:0 auto;padding:56px 22px 72px}
+.sello{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--tinta-2);margin-bottom:14px}
+h1{font-size:2.1rem;line-height:1.18;margin:0 0 14px;letter-spacing:-.4px;color:var(--noche)}
+.entrada{color:var(--tinta-2);margin:0 0 8px;max-width:60ch}
+.regla{height:3px;background:var(--oro);width:56px;border-radius:2px;margin:30px 0 34px}
+.lista{display:grid;gap:16px}
+a.libro{display:block;text-decoration:none;color:inherit;background:var(--papel-2);
+  border:1px solid var(--linea);border-radius:12px;padding:20px 22px;
+  transition:border-color .18s ease, transform .18s ease}
+a.libro:hover,a.libro:focus-visible{border-color:var(--oro);transform:translateY(-2px)}
+a.libro:focus-visible{outline:2.5px solid var(--oro);outline-offset:3px}
+.libro b{display:block;font-family:var(--sans);font-size:1.02rem;font-weight:700;
+  letter-spacing:-.2px;margin-bottom:5px}
+.libro span{display:block;font-size:.95rem;color:var(--tinta-2)}
+.libro em{display:block;font-family:var(--sans);font-style:normal;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--oro);margin-top:11px}
+.nota{margin-top:38px;padding:18px 20px;border:1px solid var(--linea);border-radius:11px;
+  font-size:.93rem;color:var(--tinta-2)}
+.nota b{font-family:var(--sans);font-size:12.5px;color:var(--tinta);display:block;margin-bottom:6px}
+footer{margin-top:34px;font-family:var(--sans);font-size:12px;color:var(--tinta-2);
+  border-top:1px solid var(--linea);padding-top:18px}
+</style>
+</head>
+<body>
+<div class="envoltura">
+  <div class="sello">Universidad de Córdoba · Montería · FDOC-088</div>
+  <h1>Libros interactivos</h1>
+  <p class="entrada">Cuatro libros del Técnico Profesional en Programación Web. No son PDF: cada uno trae calculadoras, editores y autoevaluaciones que funcionan dentro del navegador.</p>
+  <p class="entrada">Se abren con un clic, no hay nada que instalar y el progreso queda guardado en tu propio navegador.</p>
+
+  <div class="regla"></div>
+
+  <div class="lista">
+    <a class="libro" href="Libros/Libro%20Interactivo/libro-interactivo-matematica-basica.html">
+      <b>Matemática Básica</b>
+      <span>Ecuaciones, funciones, lógica proposicional, conjuntos, complejos, sucesiones y series. Resuelve, grafica y arma tablas de verdad sin salir de la página.</span>
+      <em>12 capítulos · 12 calculadoras</em>
+    </a>
+    <a class="libro" href="Libros/Libro%20Interactivo/libro-interactivo-logica-python.html">
+      <b>Introducción práctica a la lógica de programación con Python</b>
+      <span>Algoritmos, condicionales, ciclos, diagramas de flujo y modularidad. Cada bloque de código corre de verdad y construye su tabla de traza.</span>
+      <em>10 capítulos · Python en el navegador</em>
+    </a>
+    <a class="libro" href="Libros/Libro%20Interactivo/libro-interactivo-habilidades-comunicativas.html">
+      <b>Habilidades Comunicativas I</b>
+      <span>Redacción técnica, documentación, oratoria, escucha activa, asertividad y trabajo en equipo, con herramientas de práctica en cada capítulo.</span>
+      <em>12 capítulos · portafolio descargable</em>
+    </a>
+    <a class="libro" href="Libros/Libro%20Interactivo/libro-interactivo-aprendizaje-autonomo.html">
+      <b>Aprendizaje Autónomo</b>
+      <span>Metacognición, metas SMART, gestión del tiempo, evaluación de fuentes y pensamiento crítico. Construye tu Plan Personal de Aprendizaje a medida que avanzas.</span>
+      <em>12 capítulos · portafolio descargable</em>
+    </a>
+  </div>
+
+  <div class="nota">
+    <b>Antes de empezar</b>
+    Todo funciona sin conexión, salvo una excepción: la primera vez que ejecutes código en el libro de Python se descarga el motor (unos 10&nbsp;MB, una sola vez por navegador). Lo que escribas en las herramientas se guarda únicamente en tu equipo; no se envía a ningún servidor.
+  </div>
+
+  <footer>Técnico Profesional en Programación Web · Universidad de Córdoba · Montería</footer>
+</div>
+</body>
+</html>
