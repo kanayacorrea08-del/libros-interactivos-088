@@ -1,19 +1,64 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Faro Code Lab · Lógica y algoritmos</title><style>
 :root{--b:#07131f;--p:#10283d;--p2:#173750;--l:#2b4b65;--t:#f5f9fc;--m:#a9bccb;--a:#48d5be;--y:#ffd166;--ok:#60d394;--bad:#ff7373}*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--t);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}button,input,textarea,select{font:inherit}button{cursor:pointer}.top{position:sticky;top:0;z-index:9;background:#07131ff0;border-bottom:1px solid var(--l);padding:14px 20px}.topin{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:11px}.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(135deg,var(--a),#78a8ff);display:grid;place-items:center;color:#041710;font-weight:1000}.brand b{font-size:19px}.brand small{display:block;color:var(--m)}.prog{width:180px}.pm{display:flex;justify-content:space-between;color:var(--m);font-size:11px}.bar{height:7px;background:#173047;border-radius:20px;overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;width:0;background:var(--a)}.shell{max-width:1400px;margin:auto;padding:18px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:17px}.side{background:var(--p);border:1px solid var(--l);border-radius:17px;padding:9px;align-self:start;position:sticky;top:90px}.side button{width:100%;border:0;background:transparent;color:var(--m);padding:12px;text-align:left;border-radius:11px}.side button.on,.side button:hover{background:var(--p2);color:white}.view{display:none}.view.on{display:block}.hero,.card{background:var(--p);border:1px solid var(--l);border-radius:19px;padding:20px}.hero{margin-bottom:16px}.hero h1,.hero h2{margin:0 0 9px}.hero p,.card p{color:#cbd8e2;line-height:1.5}.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.path{position:relative}.path.done:after{content:"✓";position:absolute;right:13px;top:13px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--ok);color:#062016;font-weight:900}.tag{display:inline-block;border:1px solid var(--l);border-radius:99px;padding:6px 8px;color:#c9d9e4;font-size:11px;margin:2px}.btn{border:0;border-radius:11px;padding:10px 13px;font-weight:850}.pri{background:var(--a);color:#052019}.sec{background:#1a3b55;color:white;border:1px solid var(--l)}.yel{background:var(--y);color:#372a00}.work{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px}.editor{background:var(--p);border:1px solid var(--l);border-radius:17px;overflow:hidden}.tools{padding:11px;border-bottom:1px solid var(--l);display:flex;gap:7px;justify-content:space-between;align-items:center;flex-wrap:wrap}.edit{display:grid;grid-template-columns:44px minmax(0,1fr);background:#030b12}.nums{padding:13px 7px;text-align:right;white-space:pre;color:#557086;background:#07111a;border-right:1px solid #173248;font:14px/1.55 monospace}.code{width:100%;min-height:440px;resize:vertical;border:0;outline:0;padding:13px;background:#030b12;color:#eaf8ff;font:14px/1.55 monospace}.stack{display:grid;gap:12px;align-content:start}.box{background:var(--p);border:1px solid var(--l);border-radius:16px;padding:14px}.box h3{margin:0 0 9px;font-size:15px}input{width:100%;padding:11px;border-radius:10px;border:1px solid var(--l);background:#091a28;color:white;font-size:16px}.console{background:#02080d;border:1px solid #1b3549;border-radius:11px;padding:11px;min-height:140px;max-height:250px;overflow:auto;white-space:pre-wrap;font:13px/1.5 monospace}.status{margin-top:8px;padding:9px;border-radius:10px;background:#153049;color:var(--m);font-size:12px}.status.ok{border:1px solid #357555;color:#c9f3dc}.status.bad{border:1px solid #80464d;color:#ffd8dd}.tests{display:grid;gap:7px}.test{padding:9px;border:1px solid var(--l);border-radius:10px;background:#0b2031;font-size:12px}.test.ok{border-color:#357555}.test.bad{border-color:#80464d}.hide{display:none}.show{display:block}.hint{margin-top:9px;padding:10px;background:#172b3d;border-left:4px solid var(--y);border-radius:9px;color:#dce7ee}.ref{width:100%;border-collapse:collapse}.ref th,.ref td{padding:10px;border-bottom:1px solid var(--l);text-align:left}.ref th{background:var(--p2)}pre{background:#030b12;border:1px solid var(--l);border-radius:11px;padding:12px;overflow:auto;color:#eaf8ff}.small{font-size:12px;color:var(--m)}select{background:#0b1d2c;color:white;border:1px solid var(--l);border-radius:10px;padding:10px}@media(max-width:1050px){.shell{grid-template-columns:1fr}.side{position:static;display:grid;grid-template-columns:repeat(3,1fr)}.work{grid-template-columns:1fr}}@media(max-width:650px){.side,.g2{grid-template-columns:1fr}.shell{padding:11px}.prog{width:135px}.edit{grid-template-columns:34px minmax(0,1fr)}}
-</style></head><body>
+.freework{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.9fr);gap:14px;align-items:stretch}.freepane{background:var(--p);border:1px solid var(--l);border-radius:16px;overflow:hidden;min-width:0}.freehead{padding:12px 14px;background:#14344d;border-bottom:1px solid var(--l);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.freebody{padding:14px;display:grid;gap:12px;align-content:start}.freeconsole{min-height:360px;max-height:520px;overflow:auto;background:#02080d;border:1px solid #1c3548;border-radius:12px;padding:14px;white-space:pre-wrap;color:#eaf8ff;font:14px/1.55 SFMono-Regular,Consolas,monospace}.freeactions{display:flex;gap:7px;flex-wrap:wrap}@media(max-width:900px){.freework{grid-template-columns:1fr}.freeconsole{min-height:240px}}</style></head><body>
 <div class="top"><div class="topin"><div class="brand"><div class="logo">F</div><div><b>Faro Code Lab</b><small>Laboratorio de lógica y algoritmos</small></div></div><div class="prog"><div class="pm"><span>Progreso</span><span id="pt">0/7</span></div><div class="bar"><i id="pb"></i></div></div></div></div>
 <div class="shell"><nav class="side"><button class="on" data-v="ruta">🧭 Ruta de aprendizaje</button><button data-v="lab">🧪 Laboratorio</button><button data-v="libre">⌨️ Editor libre</button><button data-v="ref">📘 Referencia rápida</button><button data-v="progreso">🏁 Mi progreso</button></nav><main>
 <section class="view on" id="ruta"><div class="hero"><span class="tag">Unidad 1</span><span class="tag">Fundamentos de Programación</span><h1>Aprende haciendo</h1><p>Construye algoritmos, ejecútalos, prueba casos y corrige. Esta plataforma fue desarrollada de forma independiente para el trabajo del curso.</p><button class="btn pri" id="start">Comenzar ruta</button></div><div class="grid g2" id="paths"></div></section>
 <section class="view" id="lab"><div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><div id="tags"></div><h2 id="title"></h2></div><select id="sel"></select></div><p id="problem"></p></div><div class="work"><div class="editor"><div class="tools"><b>Editor de pseudocódigo</b><div><button class="btn pri" id="run">▶ Ejecutar</button> <button class="btn sec" id="test">🧪 Probar reto</button> <button class="btn sec" id="reset">↻ Reiniciar</button></div></div><div class="edit"><div class="nums" id="nums">1</div><textarea class="code" id="code" spellcheck="false"></textarea></div></div><aside class="stack"><div class="box"><h3>Entradas</h3><input id="inputs" placeholder="Ej.: 18 o 2500,4"><p class="small">Separa datos con coma.</p></div><div class="box"><h3>Consola</h3><div class="console" id="console">Listo para ejecutar.</div><div class="status" id="status">Escribe tu algoritmo.</div></div><div class="box"><h3>Ayuda</h3><button class="btn yel" id="h1">💡 Pista 1</button> <button class="btn yel" id="h2">💡 Pista 2</button><div class="hint hide" id="hint"></div></div></aside></div><div class="card" style="margin-top:14px"><h3>Pruebas automáticas</h3><p class="small">Se ejecutan casos reales; no se compara tu código con una plantilla.</p><div class="tests" id="tests"><div class="test">Aún no has probado el reto.</div></div><button class="btn yel" id="solb" style="margin-top:10px">Ver solución de referencia</button><div class="hide" id="sol"><pre id="solcode"></pre></div></div></section>
-<section class="view" id="libre"><div class="hero"><h2>Editor libre</h2><p>Practica tus propios ejercicios con las instrucciones disponibles en esta versión.</p></div><div class="work"><div class="editor"><div class="tools"><b>Mi algoritmo</b><button class="btn pri" id="frun">▶ Ejecutar</button></div><div class="edit"><div class="nums" id="fnums">1</div><textarea class="code" id="fcode">Proceso MiAlgoritmo
+<section class="view" id="libre">
+<div class="hero">
+  <span class="tag">Editor libre</span>
+  <h2>Escribe a un lado. Ejecuta al otro.</h2>
+  <p>Este espacio no tiene retos, respuestas esperadas ni pruebas automáticas. Es un editor abierto para escribir cualquier algoritmo compatible con la sintaxis disponible en Faro Code Lab.</p>
+</div>
+<div class="freework">
+  <div class="freepane">
+    <div class="freehead">
+      <b>⌨️ Código</b>
+      <div class="freeactions">
+        <button class="btn pri" id="frun">▶ Ejecutar</button>
+        <button class="btn sec" id="fexample">Cargar ejemplo</button>
+        <button class="btn sec" id="fclear">Limpiar</button>
+      </div>
+    </div>
+    <div class="edit">
+      <div class="nums" id="fnums">1</div>
+      <textarea class="code" id="fcode" spellcheck="false">Proceso MiAlgoritmo
     Definir numero Como Real
+
+    Escribir "Digite un número:"
     Leer numero
+
     Si numero > 0 Entonces
         Escribir "Es positivo"
     SiNo
         Escribir "No es positivo"
     FinSi
-FinProceso</textarea></div></div><aside class="stack"><div class="box"><h3>Entradas</h3><input id="finputs" placeholder="Ej.: 7"></div><div class="box"><h3>Consola</h3><div class="console" id="fconsole">Listo.</div><div class="status" id="fstatus">Editor libre.</div></div></aside></div></section>
+FinProceso</textarea>
+    </div>
+  </div>
+
+  <div class="freepane">
+    <div class="freehead"><b>▶ Ejecución</b><span class="small">Salida del programa</span></div>
+    <div class="freebody">
+      <div>
+        <h3 style="margin:0 0 8px">Entradas</h3>
+        <input id="finputs" placeholder="Ej.: 7  ·  varios datos: 7,20,Verdadero">
+        <p class="small">Cada valor corresponde, en orden, a una instrucción <code>Leer</code>. Separa varios datos con coma.</p>
+      </div>
+      <div>
+        <h3 style="margin:0 0 8px">Consola</h3>
+        <div class="freeconsole" id="fconsole">Listo para ejecutar.</div>
+      </div>
+      <div class="status" id="fstatus">Escribe tu algoritmo y pulsa Ejecutar. Aquí no se compara tu código con ninguna solución.</div>
+      <div class="box">
+        <h3>Sintaxis disponible</h3>
+        <p class="small"><code>Proceso</code>, <code>Definir</code>, <code>Leer</code>, <code>Escribir</code>, <code>&lt;-</code>, operaciones, comparaciones, <code>Si</code>, <code>SiNo</code>, <code>FinSi</code>, <code>Y</code>, <code>O</code>, <code>NO</code>, <code>Segun</code>, <code>De Otro Modo</code> y <code>FinSegun</code>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 <section class="view" id="ref"><div class="hero"><h2>Referencia rápida</h2><p>Sintaxis reconocida por Faro Code Lab V1.</p></div><div class="card"><table class="ref"><tr><th>Instrucción</th><th>Uso</th></tr><tr><td>Proceso / FinProceso</td><td>Inicio y cierre del algoritmo.</td></tr><tr><td>Definir ... Como Entero/Real/Cadena/Logico</td><td>Declara variables.</td></tr><tr><td>Leer</td><td>Recibe una entrada.</td></tr><tr><td>Escribir</td><td>Muestra una salida.</td></tr><tr><td>&lt;-</td><td>Asigna un valor.</td></tr><tr><td>Si / Entonces / SiNo / FinSi</td><td>Condiciones simples, dobles y anidadas.</td></tr><tr><td>Y / O / NO</td><td>Combina condiciones.</td></tr><tr><td>Segun / De Otro Modo / FinSegun</td><td>Selecciona entre varios valores de una misma variable.</td></tr><tr><td>+ - * / % &gt; &lt; &gt;= &lt;= = &lt;&gt;</td><td>Operadores aritméticos y relacionales.</td></tr></table></div></section>
 <section class="view" id="progreso"><div class="hero"><h2>Mi progreso</h2><p>Se guarda únicamente en este navegador.</p></div><div class="grid g2" id="pcards"></div><div class="card" style="margin-top:14px"><button class="btn sec" id="clear">Borrar progreso</button></div></section>
 </main></div>
@@ -145,5 +190,26 @@ if(/^(SiNo|FinSi|FinSegun)$/i.test(l)||/^.+:$/.test(l)){i++;continue}throw Error
 function ins(id){return $(id).value.split(",").map(x=>x.trim()).filter(Boolean)}
 run.onclick=()=>{try{console.textContent=exec(code.value,ins("inputs"))||"(Terminó sin salida)";status.className="status ok";status.textContent="Ejecución completada"}catch(e){console.textContent="ERROR: "+e.message;status.className="status bad";status.textContent="Corrige el algoritmo"}};
 test.onclick=()=>{let x=L[cur],r=x.tests.map((t,i)=>{try{let o=exec(code.value,t.i),ok=true;(t.inc||[]).forEach(s=>{if(!o.toLowerCase().includes(s.toLowerCase()))ok=false});(t.exc||[]).forEach(s=>{if(o.toLowerCase().includes(s.toLowerCase()))ok=false});return[ok,`Caso ${i+1} · ${t.i.join(", ")} → ${o||"(sin salida)"}`]}catch(e){return[false,`Caso ${i+1} · ${e.message}`]}});tests.innerHTML=r.map(z=>`<div class="test ${z[0]?"ok":"bad"}">${z[0]?"✅":"❌"} ${z[1]}</div>`).join("");if(r.every(z=>z[0])){done.add(x.id);save();status.className="status ok";status.textContent="¡Reto superado!"}};
-reset.onclick=()=>openL(cur);h1.onclick=()=>{hint.textContent=L[cur].h[0];hint.className="hint show"};h2.onclick=()=>{hint.textContent=L[cur].h[1];hint.className="hint show"};solb.onclick=()=>sol.classList.toggle("show");frun.onclick=()=>{try{fconsole.textContent=exec(fcode.value,ins("finputs"))||"(Terminó sin salida)";fstatus.className="status ok"}catch(e){fconsole.textContent="ERROR: "+e.message;fstatus.className="status bad"}};clear.onclick=()=>{if(confirm("¿Borrar progreso?")){done.clear();save()}};render();openL(0);view("ruta");lines(fcode.value,fnums);
+reset.onclick=()=>openL(cur);h1.onclick=()=>{hint.textContent=L[cur].h[0];hint.className="hint show"};h2.onclick=()=>{hint.textContent=L[cur].h[1];hint.className="hint show"};solb.onclick=()=>sol.classList.toggle("show");function runFree(){try{fconsole.textContent=exec(fcode.value,ins("finputs"))||"(El algoritmo terminó sin mostrar salida)";fstatus.className="status ok";fstatus.textContent="Ejecución completada correctamente."}catch(e){fconsole.textContent="ERROR: "+e.message;fstatus.className="status bad";fstatus.textContent="Hay un error en el algoritmo. Revisa el mensaje de la consola."}}
+frun.onclick=runFree;
+fexample.onclick=()=>{fcode.value=`Proceso Promedio
+    Definir n1, n2, promedio Como Real
+
+    Escribir "Digite la primera nota:"
+    Leer n1
+    Escribir "Digite la segunda nota:"
+    Leer n2
+
+    promedio <- (n1 + n2) / 2
+
+    Si promedio >= 3 Entonces
+        Escribir "Promedio: ", promedio
+        Escribir "Aprobado"
+    SiNo
+        Escribir "Promedio: ", promedio
+        Escribir "No aprobado"
+    FinSi
+FinProceso`;finputs.value="4,3";lines(fcode.value,fnums);fconsole.textContent="Ejemplo cargado. Pulsa Ejecutar.";fstatus.className="status";fstatus.textContent="Puedes modificar libremente el código y las entradas."};
+fclear.onclick=()=>{fcode.value="Proceso MiAlgoritmo\n\nFinProceso";finputs.value="";lines(fcode.value,fnums);fconsole.textContent="Listo para ejecutar.";fstatus.className="status";fstatus.textContent="Editor limpio."};
+clear.onclick=()=>{if(confirm("¿Borrar progreso?")){done.clear();save()}};render();openL(0);view("ruta");lines(fcode.value,fnums);
 </script></body></html>
