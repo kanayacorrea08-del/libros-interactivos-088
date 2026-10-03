@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laboratorio de Programación · Pseudocódigo</title>
+<meta name="description" content="Laboratorio interactivo de pseudocódigo para practicar estructuras secuenciales y condicionales.">
+<style>
+:root{
+  --bg:#071423;--panel:#10273d;--panel2:#153550;--text:#f7fbff;--muted:#b8c8d7;
+  --accent:#45d4bf;--accent2:#ffd166;--ok:#59d98e;--bad:#ff6b6b;--line:#2b4b66;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+body{padding:0}
+header{padding:22px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);background:#071423ee;position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.top{max-width:1280px;margin:auto;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.brand h1{font-size:clamp(22px,3vw,34px);margin:0}.brand p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.badge{padding:7px 11px;border-radius:999px;background:var(--accent);color:#05211a;font-weight:900;font-size:12px;text-transform:uppercase}
+main{max-width:1280px;margin:auto;padding:24px clamp(14px,3vw,34px) 50px}
+.grid{display:grid;grid-template-columns:360px minmax(0,1fr);gap:18px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.panelHead{padding:16px 18px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.panelHead h2{font-size:18px;margin:0}.panelHead p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.exerciseList{padding:10px}
+.exercise{width:100%;text-align:left;border:1px solid transparent;background:transparent;color:var(--text);padding:13px;border-radius:13px;cursor:pointer;margin-bottom:6px}
+.exercise:hover{background:#17344f}.exercise.active{background:#1a3d5d;border-color:#416887}
+.exercise b{display:block;font-size:15px}.exercise span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.work{display:grid;gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}
+.card h2,.card h3{margin-top:0}.problem{font-size:18px;line-height:1.55}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chip{padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px}
+.editorWrap{display:grid;grid-template-columns:1fr 300px;gap:14px}
+textarea{width:100%;min-height:410px;resize:vertical;background:#04111d;color:#eaf7ff;border:1px solid var(--line);border-radius:14px;padding:15px;font:15px/1.55 SFMono-Regular,Consolas,monospace;tab-size:4}
+textarea:focus,input:focus,button:focus{outline:2px solid var(--accent);outline-offset:2px}
+.sideTools{display:grid;gap:12px}
+label{display:block;font-weight:800;margin-bottom:6px}
+input[type=text]{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#0b1c2c;color:white;font-size:16px}
+.help{color:var(--muted);font-size:13px;line-height:1.45}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button.primary,button.secondary,button.warn{border:0;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}
+button.primary{background:var(--accent);color:#05211a}.secondary{background:#1b3a58;color:white;border:1px solid var(--line)!important}.warn{background:var(--accent2);color:#342700}
+.console{background:#020b12;border:1px solid var(--line);border-radius:14px;padding:14px;min-height:150px;white-space:pre-wrap;font:14px/1.5 SFMono-Regular,Consolas,monospace;overflow:auto}
+.status{padding:12px 14px;border-radius:12px;background:#132d45;color:var(--muted);font-size:14px}
+.status.ok{background:#59d98e18;color:#bff4d3;border:1px solid #59d98e55}.status.bad{background:#ff6b6b17;color:#ffd0d0;border:1px solid #ff6b6b55}
+.tests{display:grid;gap:8px}.test{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#0d2032;font-size:13px}
+.test.ok{border-color:#59d98e77}.test.bad{border-color:#ff6b6b77}
+.solution{display:none;margin-top:12px}.solution.show{display:block}
+pre{background:#04111d;border:1px solid var(--line);border-radius:13px;padding:14px;white-space:pre-wrap;overflow:auto;color:#e9f8ff}
+footer{max-width:1280px;margin:auto;padding:0 20px 34px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.editorWrap{grid-template-columns:1fr}.exerciseList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){header{position:static}.exerciseList{grid-template-columns:1fr}textarea{min-height:340px}.actions button{flex:1 1 auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand">
+      <h1>Laboratorio de Programación</h1>
+      <p>Fundamentos de Programación · Estructuras secuenciales y condicionales</p>
+    </div>
+    <span class="badge">100% navegador</span>
+  </div>
+</header>
+
+<main>
+<div class="grid">
+  <aside class="panel">
+    <div class="panelHead">
+      <h2>Ejercicios</h2>
+      <p>Avanza en orden. Ejecuta y prueba tu solución.</p>
+    </div>
+    <div class="exerciseList" id="exerciseList"></div>
+  </aside>
+
+  <section class="work">
+    <div class="card">
+      <h2 id="exTitle">Ejercicio</h2>
+      <div class="problem" id="exProblem"></div>
+      <div class="chips" id="exChips"></div>
+    </div>
+
+    <div class="card">
+      <div class="editorWrap">
+        <div>
+          <label for="code">Editor de pseudocódigo</label>
+          <textarea id="code" spellcheck="false"></textarea>
+          <div class="actions" style="margin-top:10px">
+            <button class="primary" id="runBtn">▶ Ejecutar</button>
+            <button class="secondary" id="testBtn">🧪 Probar solución</button>
+            <button class="secondary" id="resetBtn">↻ Reiniciar</button>
+            <button class="warn" id="hintBtn">💡 Pista</button>
+          </div>
+        </div>
+        <div class="sideTools">
+          <div>
+            <label for="inputs">Entradas para ejecutar</label>
+            <input id="inputs" type="text" placeholder="Ej.: 18 o 2500,4">
+            <p class="help">Separa varios datos con coma. El primer <code>Leer</code> toma el primer dato, el segundo <code>Leer</code> toma el segundo, etc.</p>
+          </div>
+          <div>
+            <label>Consola</label>
+            <div class="console" id="console">Listo para ejecutar.</div>
+          </div>
+          <div id="status" class="status">Escribe tu algoritmo y pulsa Ejecutar.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Pruebas automáticas</h3>
+      <p class="help">“Probar solución” ejecuta varios casos. No mira si escribiste exactamente igual al ejemplo: verifica el resultado.</p>
+      <div class="tests" id="tests"><div class="test">Aún no has ejecutado las pruebas.</div></div>
+      <button class="warn" id="solutionBtn" style="margin-top:12px">Ver solución de referencia</button>
+      <div class="solution" id="solution"><pre id="solutionCode"></pre></div>
+    </div>
+  </section>
+</div>
+</main>
+<footer>Laboratorio educativo · Los datos y el progreso permanecen en este navegador. No requiere servidor para ejecutar los algoritmos.</footer>
+
+<script>
+(() => {
+const EX = [
+{
+ id:"seq", title:"1 · Compra — Secuencial",
+ problem:"Pide el precio unitario y la cantidad de productos. Calcula y muestra el subtotal.",
+ chips:["Definir","Leer","Escribir","<-"],
+ starter:`Proceso Compra
+    Definir cantidad Como Entero
+    Definir precio, subtotal Como Real
+
+    // Escribe aquí tu solución
+
+FinProceso`,
+ hint:"Primero lee precio y cantidad. Después calcula subtotal <- precio * cantidad y finalmente muéstralo.",
+ tests:[
+  {input:["2500","4"], includes:["10000"]},
+  {input:["1200","5"], includes:["6000"]},
+  {input:["1999.5","3"], includes:["5998.5"]}
+ ],
+ solution:`Proceso Compra
+    Definir cantidad Como Entero
+    Definir precio, subtotal Como Real
+
+    Escribir "Digite el precio:"
+    Leer precio
+    Escribir "Digite la cantidad:"
+    Leer cantidad
+
+    subtotal <- precio * cantidad
+    Escribir "Subtotal: ", subtotal
+FinProceso`
+},
+{
+ id:"simple", title:"2 · Temperatura — Condicional simple",
+ problem:"Lee la temperatura de una nevera. Si supera 8 °C, muestra “Revisar refrigeración”. Si no la supera, no muestres alerta.",
+ chips:["Si","Entonces","FinSi",">"],
+ starter:`Proceso ControlTemperatura
+    Definir temperatura Como Real
+
+    // Completa el algoritmo
+
+FinProceso`,
+ hint:"La palabra “supera” significa mayor que. El valor 8 exacto no debe activar la alerta.",
+ tests:[
+  {input:["7"], excludes:["Revisar refrigeración"]},
+  {input:["8"], excludes:["Revisar refrigeración"]},
+  {input:["9"], includes:["Revisar refrigeración"]}
+ ],
+ solution:`Proceso ControlTemperatura
+    Definir temperatura Como Real
+    Escribir "Digite la temperatura:"
+    Leer temperatura
+
+    Si temperatura > 8 Entonces
+        Escribir "Revisar refrigeración"
+    FinSi
+FinProceso`
+},
+{
+ id:"double", title:"3 · Edad — Condicional doble",
+ problem:"Lee la edad. Si tiene 18 años o más, muestra “Puede ingresar”; en caso contrario, muestra “No puede ingresar”.",
+ chips:["Si","SiNo","FinSi",">="],
+ starter:`Proceso ControlIngreso
+    Definir edad Como Entero
+
+    // Completa el algoritmo
+
+FinProceso`,
+ hint:"Aquí necesitas dos caminos: uno para verdadero y otro para falso. Usa SiNo.",
+ tests:[
+  {input:["17"], includes:["No puede ingresar"]},
+  {input:["18"], includes:["Puede ingresar"]},
+  {input:["25"], includes:["Puede ingresar"]}
+ ],
+ solution:`Proceso ControlIngreso
+    Definir edad Como Entero
+    Escribir "Digite la edad:"
+    Leer edad
+
+    Si edad >= 18 Entonces
+        Escribir "Puede ingresar"
+    SiNo
+        Escribir "No puede ingresar"
+    FinSi
+FinProceso`
+},
+{
+ id:"and", title:"4 · Acceso — Condición compuesta",
+ problem:"Para ingresar, una persona debe tener 18 años o más Y presentar identificación. Lee edad y un valor lógico para identificación.",
+ chips:["Y","Logico","Verdadero","Falso"],
+ starter:`Proceso AccesoActividad
+    Definir edad Como Entero
+    Definir tieneIdentificacion Como Logico
+
+    // Completa el algoritmo
+
+FinProceso`,
+ hint:"La condición debe exigir las dos cosas al mismo tiempo: edad >= 18 Y tieneIdentificacion.",
+ tests:[
+  {input:["20","Verdadero"], includes:["Ingreso permitido"]},
+  {input:["20","Falso"], includes:["Ingreso no permitido"]},
+  {input:["17","Verdadero"], includes:["Ingreso no permitido"]}
+ ],
+ solution:`Proceso AccesoActividad
+    Definir edad Como Entero
+    Definir tieneIdentificacion Como Logico
+
+    Leer edad
+    Leer tieneIdentificacion
+
+    Si edad >= 18 Y tieneIdentificacion Entonces
+        Escribir "Ingreso permitido"
+    SiNo
+        Escribir "Ingreso no permitido"
+    FinSi
+FinProceso`
+},
+{
+ id:"nested", title:"5 · Paquete — Validación + decisión",
+ problem:"Lee el peso de un paquete. Si es ≤ 0, muestra “Peso inválido”. Si es válido y pesa hasta 20 kg, muestra “Puede ir en moto”; en otro caso, “Requiere otro transporte”.",
+ chips:["Validación","Si anidado","<=",">"],
+ starter:`Proceso TransportePaquete
+    Definir peso Como Real
+
+    // Completa el algoritmo
+
+FinProceso`,
+ hint:"Primero valida peso <= 0. Solo en el SiNo de esa validación debes decidir si peso <= 20.",
+ tests:[
+  {input:["-2"], includes:["Peso inválido"]},
+  {input:["0"], includes:["Peso inválido"]},
+  {input:["15"], includes:["Puede ir en moto"]},
+  {input:["20"], includes:["Puede ir en moto"]},
+  {input:["21"], includes:["Requiere otro transporte"]}
+ ],
+ solution:`Proceso TransportePaquete
+    Definir peso Como Real
+    Leer peso
+
+    Si peso <= 0 Entonces
+        Escribir "Peso inválido"
+    SiNo
+        Si peso <= 20 Entonces
+            Escribir "Puede ir en moto"
+        SiNo
+            Escribir "Requiere otro transporte"
+        FinSi
+    FinSi
+FinProceso`
+}
+];
+
+const $=id=>document.getElementById(id);
+let current=0;
+
+function renderList(){
+ $("exerciseList").innerHTML=EX.map((e,i)=>`<button class="exercise ${i===current?'active':''}" data-i="${i}"><b>${e.title}</b><span>${e.chips.join(" · ")}</span></button>`).join("");
+ document.querySelectorAll(".exercise").forEach(b=>b.addEventListener("click",()=>load(+b.dataset.i)));
+}
+function load(i){
+ current=i; const e=EX[i];
+ renderList();
+ $("exTitle").textContent=e.title;
+ $("exProblem").textContent=e.problem;
+ $("exChips").innerHTML=e.chips.map(x=>`<span class="chip">${x}</span>`).join("");
+ $("code").value=e.starter;
+ $("inputs").value="";
+ $("console").textContent="Listo para ejecutar.";
+ $("status").className="status"; $("status").textContent="Escribe tu algoritmo y pulsa Ejecutar.";
+ $("tests").innerHTML='<div class="test">Aún no has ejecutado las pruebas.</div>';
+ $("solutionCode").textContent=e.solution; $("solution").classList.remove("show");
+}
+function normalizeText(s){
+ return s.replace(/\r/g,"").replace(/\/\/.*$/gm,"").trim();
+}
+function val(v){
+ if(typeof v==="boolean"||typeof v==="number") return v;
+ const s=String(v).trim();
+ if(/^verdadero$/i.test(s)) return true;
+ if(/^falso$/i.test(s)) return false;
+ if(/^[-+]?\d+(\.\d+)?$/.test(s)) return Number(s);
+ return s;
+}
+function transformExpr(expr,vars){
+ let x=expr.trim();
+ x=x.replace(/<>/g,"!=");
+ x=x.replace(/(?<![<>=!])=(?!=)/g,"==");
+ x=x.replace(/\bY\b/gi,"&&").replace(/\bO\b/gi,"||").replace(/\bNO\b/gi,"!");
+ x=x.replace(/\bVerdadero\b/gi,"true").replace(/\bFalso\b/gi,"false");
+ x=x.replace(/\b([A-Za-z_]\w*)\b/g,(m,n)=>{
+   if(["true","false"].includes(n)) return n;
+   if(Object.prototype.hasOwnProperty.call(vars,n)) return JSON.stringify(vars[n]);
+   return m;
+ });
+ if(!/^[\s\d."'()+\-*/%<>=!&|truefals]+$/i.test(x)) throw new Error("Expresión no reconocida: "+expr);
+ return Function('"use strict";return ('+x+')')();
+}
+function splitWrite(text,vars){
+ const parts=[]; let cur="",quote=false;
+ for(let i=0;i<text.length;i++){const ch=text[i]; if(ch==='"') quote=!quote; if(ch===','&&!quote){parts.push(cur);cur="";}else cur+=ch}
+ parts.push(cur);
+ return parts.map(p=>{
+   p=p.trim();
+   if(/^".*"$/.test(p)) return p.slice(1,-1);
+   if(Object.prototype.hasOwnProperty.call(vars,p)) return String(vars[p]);
+   try{return String(transformExpr(p,vars))}catch{return p}
+ }).join("");
+}
+function execute(code,inputValues){
+ const lines=normalizeText(code).split("\n").map(x=>x.trim()).filter(Boolean);
+ const vars={}; const types={}; const out=[]; let inp=0;
+ const execBlock=(start,end)=>{
+   let i=start;
+   while(i<end){
+     let l=lines[i];
+     if(/^(Proceso|FinProceso)\b/i.test(l)){i++;continue}
+     let m=l.match(/^Definir\s+(.+?)\s+Como\s+(\w+)/i);
+     if(m){m[1].split(",").map(x=>x.trim()).forEach(n=>{types[n]=m[2].toLowerCase(); vars[n]=types[n]==="logico"?false:types[n]==="cadena"?"":0});i++;continue}
+     m=l.match(/^Escribir\s+(.+)/i);
+     if(m){out.push(splitWrite(m[1],vars));i++;continue}
+     m=l.match(/^Leer\s+([A-Za-z_]\w*)/i);
+     if(m){if(inp>=inputValues.length) throw new Error("Falta un dato de entrada para Leer "+m[1]); vars[m[1]]=val(inputValues[inp++]);i++;continue}
+     m=l.match(/^([A-Za-z_]\w*)\s*<-\s*(.+)$/);
+     if(m){vars[m[1]]=transformExpr(m[2],vars);i++;continue}
+     m=l.match(/^Si\s+(.+?)\s+Entonces$/i);
+     if(m){
+       let depth=1,j=i+1,elseAt=-1;
+       for(;j<end;j++){if(/^Si\s+.+\s+Entonces$/i.test(lines[j]))depth++; else if(/^FinSi$/i.test(lines[j])){depth--;if(depth===0)break}else if(/^SiNo$/i.test(lines[j])&&depth===1)elseAt=j}
+       if(depth!==0) throw new Error("Falta FinSi");
+       const cond=!!transformExpr(m[1],vars);
+       if(cond) execBlock(i+1,elseAt>=0?elseAt:j); else if(elseAt>=0) execBlock(elseAt+1,j);
+       i=j+1;continue
+     }
+     if(/^SiNo$/i.test(l)||/^FinSi$/i.test(l)){i++;continue}
+     throw new Error("No reconozco esta instrucción: "+l);
+   }
+ };
+ execBlock(0,lines.length);
+ return out.join("\n");
+}
+function run(){
+ try{
+   const inputs=$("inputs").value.split(",").map(x=>x.trim()).filter(x=>x.length);
+   const out=execute($("code").value,inputs);
+   $("console").textContent=out||"(El algoritmo terminó sin mostrar salida)";
+   $("status").className="status ok"; $("status").textContent="Ejecución completada.";
+ }catch(err){
+   $("console").textContent="ERROR: "+err.message;
+   $("status").className="status bad"; $("status").textContent="Hay un error. Lee la consola y corrígelo.";
+ }
+}
+function test(){
+ const e=EX[current]; const results=[];
+ e.tests.forEach((t,idx)=>{
+   try{
+     const out=execute($("code").value,t.input);
+     let ok=true;
+     (t.includes||[]).forEach(s=>{if(!out.toLowerCase().includes(s.toLowerCase()))ok=false});
+     (t.excludes||[]).forEach(s=>{if(out.toLowerCase().includes(s.toLowerCase()))ok=false});
+     results.push({ok,text:`Caso ${idx+1} · Entradas: ${t.input.join(", ")} · Salida: ${out||"(sin salida)"}`});
+   }catch(err){results.push({ok:false,text:`Caso ${idx+1} · Error: ${err.message}`})}
+ });
+ $("tests").innerHTML=results.map(r=>`<div class="test ${r.ok?'ok':'bad'}">${r.ok?'✅':'❌'} ${escapeHtml(r.text)}</div>`).join("");
+ const passed=results.filter(r=>r.ok).length;
+ $("status").className="status "+(passed===results.length?"ok":"bad");
+ $("status").textContent=`Pruebas superadas: ${passed}/${results.length}`;
+}
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+$("runBtn").addEventListener("click",run);
+$("testBtn").addEventListener("click",test);
+$("resetBtn").addEventListener("click",()=>load(current));
+$("hintBtn").addEventListener("click",()=>alert(EX[current].hint));
+$("solutionBtn").addEventListener("click",()=>$("solution").classList.toggle("show"));
+$("code").addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const t=e.target,s=t.selectionStart,n=t.selectionEnd;t.value=t.value.slice(0,s)+"    "+t.value.slice(n);t.selectionStart=t.selectionEnd=s+4}});
+load(0);
+})();
+</script>
+</body>
+</html>
