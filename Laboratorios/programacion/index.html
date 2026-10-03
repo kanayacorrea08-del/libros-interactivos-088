@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laboratorio de Programación</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><div class="top"><div><h1>Laboratorio de Programación</h1><p>Fundamentos de Programación · Estructuras secuenciales y condicionales</p></div><span class="badge">Sin instalar nada</span></div></header>
+<main><div class="layout">
+<aside class="panel"><div class="head"><h2>Ejercicios</h2><p>Resuelve, ejecuta y prueba.</p></div><div id="exerciseList" class="exercise-list"></div></aside>
+<section class="workspace">
+<div class="card"><h2 id="title"></h2><p id="problem" class="problem"></p><div id="chips" class="chips"></div></div>
+<div class="card editor-grid">
+<div><label for="code">Editor de pseudocódigo</label><textarea id="code" spellcheck="false"></textarea><div class="actions"><button id="run" class="primary">▶ Ejecutar</button><button id="test">🧪 Probar solución</button><button id="reset">↻ Reiniciar</button><button id="hint" class="hint">💡 Pista</button></div></div>
+<div class="side"><div><label for="inputs">Entradas</label><input id="inputs" placeholder="Ej.: 18 o 2500,4"><p class="help">Separa varios datos con coma, en el mismo orden de los Leer.</p></div><div><label>Consola</label><pre id="console">Listo para ejecutar.</pre></div><div id="status" class="status">Escribe tu algoritmo y ejecútalo.</div></div>
+</div>
+<div class="card"><h3>Pruebas automáticas</h3><p class="help">Se ejecutan varios casos y se comprueba la salida esperada.</p><div id="tests"></div><button id="solution" class="hint">Ver solución de referencia</button><pre id="solutionCode" class="hidden"></pre></div>
+</section></div></main>
+<footer>Laboratorio educativo · Funciona completamente en el navegador.</footer>
+<script src="app.js"></script>
+</body></html>
