@@ -31,8 +31,8 @@
 <section class="view" id="libre">
 <div class="hero">
   <span class="tag">Editor libre</span>
-  <h2>Escribe a un lado. Ejecuta al otro.</h2>
-  <p>Este espacio no tiene retos, respuestas esperadas ni pruebas automáticas. Es un editor abierto para escribir cualquier algoritmo compatible con la sintaxis disponible en Faro Code Lab.</p>
+  <h2>Editor y consola interactiva</h2>
+  <p>Escribe el pseudocódigo a la izquierda. Al ejecutar, la consola de la derecha se comporta como una terminal: cuando el programa llegue a <code>Leer</code>, te pedirá el dato en ese momento.</p>
 </div>
 <div class="freework">
   <div class="freepane">
@@ -41,7 +41,7 @@
       <div class="freeactions">
         <button class="btn pri" id="frun">▶ Ejecutar</button>
         <button class="btn sec" id="fexample">Cargar ejemplo</button>
-        <button class="btn sec" id="fclear">Limpiar</button>
+        <button class="btn sec" id="fclear">Nuevo</button>
       </div>
     </div>
     <div class="edit">
@@ -62,18 +62,18 @@ FinProceso</textarea>
   </div>
 
   <div class="freepane">
-    <div class="freehead"><b>▶ Ejecución</b><span class="small">Salida del programa</span></div>
+    <div class="freehead"><b>💻 Consola de salida</b><button class="btn sec" id="fconsoleClear">Limpiar consola</button></div>
     <div class="freebody">
       <div>
-        <h3 style="margin:0 0 8px">Entradas</h3>
-        <input id="finputs" placeholder="Ej.: 7  ·  varios datos: 7,20,Verdadero">
-        <p class="small">Cada valor corresponde, en orden, a una instrucción <code>Leer</code>. Separa varios datos con coma.</p>
+        <div class="freeconsole" id="fconsole">// Presiona ▶ Ejecutar.
+// Cuando el programa encuentre Leer, podrás escribir aquí mismo.</div>
       </div>
       <div>
-        <h3 style="margin:0 0 8px">Consola</h3>
-        <div class="freeconsole" id="fconsole">Listo para ejecutar.</div>
+        <h3 style="margin:0 0 8px">Entrada de consola</h3>
+        <input id="fterminal" placeholder="Ejecuta el programa para comenzar..." disabled>
+        <p class="small" id="fterminalHelp">Cuando el algoritmo llegue a <code>Leer</code>, escribe el dato y presiona Enter.</p>
       </div>
-      <div class="status" id="fstatus">Escribe tu algoritmo y pulsa Ejecutar. Aquí no se compara tu código con ninguna solución.</div>
+      <div class="status" id="fstatus">Intérprete listo.</div>
       <div class="box">
         <h3>Sintaxis disponible</h3>
         <p class="small"><code>Proceso</code>, <code>Definir</code>, <code>Leer</code>, <code>Escribir</code>, <code>&lt;-</code>, operaciones, comparaciones, <code>Si</code>, <code>SiNo</code>, <code>FinSi</code>, <code>Y</code>, <code>O</code>, <code>NO</code>, <code>Segun</code>, <code>De Otro Modo</code> y <code>FinSegun</code>.</p>
@@ -213,18 +213,59 @@ if(/^(SiNo|FinSi|FinSegun)$/i.test(l)||/^.+:$/.test(l)){i++;continue}throw Error
 function ins(id){return $(id).value.split(",").map(x=>x.trim()).filter(Boolean)}
 run.onclick=()=>{try{console.textContent=exec(code.value,ins("inputs"))||"(Terminó sin salida)";status.className="status ok";status.textContent="Ejecución completada"}catch(e){console.textContent="ERROR: "+e.message;status.className="status bad";status.textContent="Corrige el algoritmo"}};
 test.onclick=()=>{let x=L[cur],r=x.tests.map((t,i)=>{try{let o=exec(code.value,t.i),ok=true;(t.inc||[]).forEach(s=>{if(!o.toLowerCase().includes(s.toLowerCase()))ok=false});(t.exc||[]).forEach(s=>{if(o.toLowerCase().includes(s.toLowerCase()))ok=false});return[ok,`Caso ${i+1} · ${t.i.join(", ")} → ${o||"(sin salida)"}`]}catch(e){return[false,`Caso ${i+1} · ${e.message}`]}});tests.innerHTML=r.map(z=>`<div class="test ${z[0]?"ok":"bad"}">${z[0]?"✅":"❌"} ${z[1]}</div>`).join("");if(r.every(z=>z[0])){done.add(x.id);save();status.className="status ok";status.textContent="¡Reto superado!"}};
-reset.onclick=()=>openL(cur);h1.onclick=()=>{hint.textContent=L[cur].h[0];hint.className="hint show"};h2.onclick=()=>{hint.textContent=L[cur].h[1];hint.className="hint show"};solb.onclick=()=>sol.classList.toggle("show");function runFree(){try{fconsole.textContent=exec(fcode.value,ins("finputs"))||"(El algoritmo terminó sin mostrar salida)";fstatus.className="status ok";fstatus.textContent="Ejecución completada correctamente."}catch(e){fconsole.textContent="ERROR: "+e.message;fstatus.className="status bad";fstatus.textContent="Hay un error en el algoritmo. Revisa el mensaje de la consola."}}
-frun.onclick=runFree;
-fexample.onclick=()=>{fcode.value=`Proceso Promedio
-    Definir n1, n2, promedio Como Real
+reset.onclick=()=>openL(cur);h1.onclick=()=>{hint.textContent=L[cur].h[0];hint.className="hint show"};h2.onclick=()=>{hint.textContent=L[cur].h[1];hint.className="hint show"};solb.onclick=()=>sol.classList.toggle("show");let fwait=null,frunning=false;
+function fappend(t){if(fconsole.textContent.startsWith("// Presiona")||fconsole.textContent==="Consola limpia.")fconsole.textContent="";fconsole.textContent+=(fconsole.textContent?"\n":"")+t;fconsole.scrollTop=fconsole.scrollHeight}
+function fask(name){return new Promise(resolve=>{fwait=v=>{fwait=null;fterminal.disabled=true;fterminal.value="";fterminal.placeholder="Ejecuta el programa para comenzar...";fterminalHelp.innerHTML='Cuando el algoritmo llegue a <code>Leer</code>, escribe el dato y presiona Enter.';fappend("> "+v);resolve(v)};fterminal.disabled=false;fterminal.placeholder="Valor para "+name;fterminalHelp.textContent="Esperando un valor para: "+name;fterminal.focus()})}
+fterminal.onkeydown=e=>{if(e.key==="Enter"&&fwait){e.preventDefault();let v=fterminal.value.trim();if(v!==""){let r=fwait;r(v)}}};
+fconsoleClear.onclick=()=>{if(!frunning)fconsole.textContent="Consola limpia."};
 
+async function execInteractive(src){
+ const a=src.replace(/\r/g,"").replace(/\/\/.*$/gm,"").split("\n").map(x=>x.trim()).filter(Boolean),v={};
+ async function go(s,e){
+  let i=s;
+  while(i<e){
+   let l=a[i],m;
+   if(/^(Proceso|FinProceso)\b/i.test(l)){i++;continue}
+   if((m=l.match(/^Definir\s+(.+?)\s+Como\s+(\w+)/i))){m[1].split(",").map(x=>x.trim()).forEach(n=>v[n]=m[2].toLowerCase()==="logico"?false:m[2].toLowerCase()==="cadena"?"":0);i++;continue}
+   if((m=l.match(/^Leer\s+([A-Za-z_]\w*)/i))){v[m[1]]=val(await fask(m[1]));i++;continue}
+   if((m=l.match(/^Escribir\s+(.+)/i))){fappend(wr(m[1],v));i++;continue}
+   if((m=l.match(/^([A-Za-z_]\w*)\s*<-\s*(.+)$/))){v[m[1]]=ex(m[2],v);i++;continue}
+   if((m=l.match(/^Si\s+(.+?)\s+Entonces$/i))){
+    let d=1,j=i+1,z=-1;
+    for(;j<e;j++){if(/^Si\s+.+\s+Entonces$/i.test(a[j]))d++;else if(/^FinSi$/i.test(a[j])){d--;if(d===0)break}else if(/^SiNo$/i.test(a[j])&&d===1)z=j}
+    if(d!==0)throw Error("Falta FinSi");
+    if(ex(m[1],v))await go(i+1,z>=0?z:j);else if(z>=0)await go(z+1,j);
+    i=j+1;continue
+   }
+   if((m=l.match(/^Segun\s+(.+?)\s+Hacer$/i))){
+    let j=i+1,d=1;
+    for(;j<e;j++){if(/^Segun\s+.+\s+Hacer$/i.test(a[j]))d++;else if(/^FinSegun$/i.test(a[j])){d--;if(d===0)break}}
+    if(d!==0)throw Error("Falta FinSegun");
+    const target=ex(m[1],v);let secs=[],curS=null,depth=0;
+    for(let k=i+1;k<j;k++){const x=a[k];if(/^Segun\s+.+\s+Hacer$/i.test(x))depth++;if(/^FinSegun$/i.test(x))depth--;if(depth===0){let cm=x.match(/^(.+):$/);if(cm){if(curS)secs.push(curS);curS={label:cm[1].trim(),start:k+1,end:j};continue}if(/^De Otro Modo:$/i.test(x)){if(curS)secs.push(curS);curS={label:"__default__",start:k+1,end:j};continue}}if(curS)curS.end=k+1}
+    if(curS)secs.push(curS);let pick=secs.find(q=>q.label!=="__default__"&&val(q.label)===target)||secs.find(q=>q.label==="__default__");if(pick)await go(pick.start,pick.end);i=j+1;continue
+   }
+   if(/^(SiNo|FinSi|FinSegun)$/i.test(l)||/^De Otro Modo:$/i.test(l)||/^.+:$/.test(l)){i++;continue}
+   throw Error("No reconozco esta instrucción: "+l)
+  }
+ }
+ await go(0,a.length)
+}
+
+async function runFree(){
+ if(frunning)return;frunning=true;fwait=null;fterminal.disabled=true;fconsole.textContent="";fstatus.className="status";fstatus.textContent="Ejecutando...";
+ try{await execInteractive(fcode.value);if(!fconsole.textContent)fconsole.textContent="(El algoritmo terminó sin mostrar salida)";fstatus.className="status ok";fstatus.textContent="Ejecución completada."}
+ catch(e){fterminal.disabled=true;fappend("ERROR: "+e.message);fstatus.className="status bad";fstatus.textContent="Hay un error en el algoritmo."}
+ finally{frunning=false}
+}
+frun.onclick=runFree;
+fexample.onclick=()=>{if(frunning)return;fcode.value=`Proceso Promedio
+    Definir n1, n2, promedio Como Real
     Escribir "Digite la primera nota:"
     Leer n1
     Escribir "Digite la segunda nota:"
     Leer n2
-
     promedio <- (n1 + n2) / 2
-
     Si promedio >= 3 Entonces
         Escribir "Promedio: ", promedio
         Escribir "Aprobado"
@@ -232,7 +273,8 @@ fexample.onclick=()=>{fcode.value=`Proceso Promedio
         Escribir "Promedio: ", promedio
         Escribir "No aprobado"
     FinSi
-FinProceso`;finputs.value="4,3";lines(fcode.value,fnums);fconsole.textContent="Ejemplo cargado. Pulsa Ejecutar.";fstatus.className="status";fstatus.textContent="Puedes modificar libremente el código y las entradas."};
-fclear.onclick=()=>{fcode.value="Proceso MiAlgoritmo\n\nFinProceso";finputs.value="";lines(fcode.value,fnums);fconsole.textContent="Listo para ejecutar.";fstatus.className="status";fstatus.textContent="Editor limpio."};
+FinProceso`;lines(fcode.value,fnums);fconsole.textContent="// Ejemplo cargado. Pulsa Ejecutar.";fstatus.className="status";fstatus.textContent="Ejemplo cargado."};
+fclear.onclick=()=>{if(frunning)return;fcode.value="Proceso MiAlgoritmo\n\nFinProceso";lines(fcode.value,fnums);fconsole.textContent="// Presiona ▶ Ejecutar.";fstatus.className="status";fstatus.textContent="Archivo nuevo.";fterminal.disabled=true;fterminal.value=""};
+clear.onclick=()=>{fcode.value="Proceso MiAlgoritmo\n\nFinProceso";finputs.value="";lines(fcode.value,fnums);fconsole.textContent="Listo para ejecutar.";fstatus.className="status";fstatus.textContent="Editor limpio."};
 clear.onclick=()=>{if(confirm("¿Borrar progreso?")){done.clear();save()}};render();openL(0);view("ruta");lines(fcode.value,fnums);
 </script></body></html>
